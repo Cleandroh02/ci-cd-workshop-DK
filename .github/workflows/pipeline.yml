@@ -47,7 +47,7 @@ jobs:
             exit 1
 
         fi
-        echo "ON PR"$ {{ github.event.pull_request.base.ref }}
+        echo "ON PR: ${{ github.event.pull_request.base.ref }}"
         echo "!!!!!Lowercase branch name working!!!!!!!!!!!!!: $branch_name"
 
         echo "branch_name=$branch_name" >> $GITHUB_OUTPUT
