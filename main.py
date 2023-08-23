@@ -34,7 +34,7 @@ Base.metadata.create_all(bind=engine)
 
 @app.get("/", include_in_schema=False)
 async def home():
-    return {"message": "Hello Friends"}
+    return {"message": "Hello Friends..."}
 
 
 # Create a new book
