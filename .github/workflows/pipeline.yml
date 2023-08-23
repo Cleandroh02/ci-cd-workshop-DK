@@ -8,7 +8,8 @@ on:
 
 
 jobs:
-  test-format-check:
+  build:
+    name: Build container image
     runs-on: ubuntu-latest
 
     steps:
