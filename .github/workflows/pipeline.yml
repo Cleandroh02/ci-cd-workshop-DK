@@ -34,6 +34,15 @@ jobs:
     - name: Check code style with flake8
       run: flake8
 
+    - name: Get Branch Name
+      id: branch_name
+      run: |
+        # Extract branch name without 'refs/heads/' prefix
+        branch_name="${{ github.ref#refs/heads/ }}"
+        # Convert branch name to lowercase
+        lowercase_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]')
+
+
     - name: Log into registry
       uses: azure/docker-login@v1
       with:
@@ -44,7 +53,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
           push: true
-          tags: ${{ secrets.ACR_ENDPOINT }}/booksapi:${{ github.ref#refs/heads/ }}
+          tags: ${{ secrets.ACR_ENDPOINT }}/booksapi:${{ steps.get_branch_name.outputs.lowercase_branch_name }}
 
 
     
