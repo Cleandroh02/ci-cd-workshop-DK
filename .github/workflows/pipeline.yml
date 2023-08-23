@@ -58,7 +58,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
           push: true
-          tags: ${{ secrets.ACR_ENDPOINT }}/booksapi:$lowercase_branch_name
+          tags: ${{ secrets.ACR_ENDPOINT }}/booksapi:${{env.lowercase_branch_name}}
 
 
 
