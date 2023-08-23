@@ -7,7 +7,10 @@ import pytest
 client = TestClient(app)
 DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(DATABASE_URL)
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+TestingSessionLocal = sessionmaker(
+    autocommit=False, autoflush=False, bind=engine
+    )
+
 
 @pytest.fixture(scope="function")
 def db():
@@ -24,22 +27,26 @@ def test_home_endpoint():
     assert response.status_code == 200
     assert response.json() == {"message": "Hello World"}
 
+
 def test_create_book_endpoint(db):
     book_data = {
         "title": "Sample Book",
         "author": "John Doe",
         "year": 2023,
         "pages": 300,
-        "isbn": "1234567890"
+        "isbn": "1234567890",
     }
     response = client.post("/books/", json=book_data)
     assert response.status_code == 200
     created_book = response.json()
     assert created_book["title"] == "Sample Book"
 
+
 def test_get_book_endpoint(db):
     # Add a test book to the database
-    test_book = BookDB(title="Test Book", author="Author", year=2021, pages=250, isbn="987654")
+    test_book = BookDB(
+        title="Test Book", author="Author", year=2021, pages=250, isbn="987654"
+    )
     db.add(test_book)
     db.commit()
 
@@ -48,14 +55,21 @@ def test_get_book_endpoint(db):
     retrieved_book = response.json()
     assert retrieved_book["title"] == "Test Book"
 
+
 def test_get_all_books(db):
     # Clear the database and add test books
     db.query(BookDB).delete()
     db.commit()
 
     test_books = [
-        BookDB(title="Book 1", author="Author 1", year=2022, pages=200, isbn="123456"),
-        BookDB(title="Book 2", author="Author 2", year=2023, pages=250, isbn="789012")
+        BookDB(
+            title="Book 1", author="Author 1",
+            year=2022, pages=200, isbn="123456"
+        ),
+        BookDB(
+            title="Book 2", author="Author 2",
+            year=2023, pages=250, isbn="789012"
+        ),
     ]
     db.add_all(test_books)
     db.commit()
@@ -67,12 +81,19 @@ def test_get_all_books(db):
     assert books[0]["title"] == "Book 1"
     assert books[1]["title"] == "Book 2"
 
+
 def test_delete_book(db):
     # Clear the database and add a test book
     db.query(BookDB).delete()
     db.commit()
 
-    test_book = BookDB(title="Book 1", author="Author 1", year=2022, pages=200, isbn="123456")
+    test_book = BookDB(
+        title="Book 1",
+        author="Author 1",
+        year=2022,
+        pages=200,
+        isbn="123456"
+    )
     db.add(test_book)
     db.commit()
 

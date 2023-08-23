@@ -28,6 +28,7 @@ class BookDB(Base):
     pages = Column(Integer)
     isbn = Column(String)
 
+
 Base.metadata.create_all(bind=engine)
 
 
@@ -46,6 +47,7 @@ async def create_book(book: Book) -> Book:
     db.refresh(db_book)
     db.close()
     return book
+
 
 @app.get("/books/{book_id}")
 async def get_book(book_id: int):
@@ -80,6 +82,5 @@ async def delete_book(book_id: int):
     raise HTTPException(status_code=404, detail="Book not found")
 
 
-
-if __name__ == '__main__':
-    uvicorn.run('main:app', host='0.0.0.0', port=8000)
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000)

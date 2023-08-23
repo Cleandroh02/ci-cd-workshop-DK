@@ -8,4 +8,3 @@ class Book(BaseModel):
     year: int
     pages: Optional[int] = None
     isbn: Optional[str] = None
-    
