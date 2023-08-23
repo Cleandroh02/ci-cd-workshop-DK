@@ -46,8 +46,8 @@ jobs:
             exit 1
 
         fi
-        
-        lowercase_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]')
+        env:
+            lowercase_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]')
     - name: Log into registry
       uses: azure/docker-login@v1
       with:
