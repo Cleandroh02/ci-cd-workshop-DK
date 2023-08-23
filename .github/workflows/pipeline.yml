@@ -2,7 +2,7 @@ name: CI
 
 on:
     push:
-      branches: ["apicicd", "main"]
+      tags: ["v*.*.*"]
     pull_request:
         branches: ["apicicd", "main"]
 
