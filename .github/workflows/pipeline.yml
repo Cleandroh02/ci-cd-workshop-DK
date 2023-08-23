@@ -3,7 +3,6 @@ name: CI
 on:
     push:
       branches: ["apicicd"]
-      tags: ['v*.*.*']
     pull_request:
         branches: [ "main" ]
 
@@ -45,7 +44,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
           push: true
-          tags: ${{ secrets.ACR_ENDPOINT }}/booksapi:latest
+          tags: ${{ secrets.ACR_ENDPOINT }}/booksapi:${{ github.ref }}
 
 
     
