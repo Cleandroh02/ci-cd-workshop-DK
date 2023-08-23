@@ -2,9 +2,9 @@ name: CI
 
 on:
     push:
-      tags: ["apicicd", "main"]
+      branches: ["apicicd"]
     pull_request:
-        branches: ["apicicd", "main"]
+        branches: ["main"]
 
 
 jobs:
@@ -47,8 +47,8 @@ jobs:
             exit 1
 
         fi
-      
-        echo "!!!!!!!!!!!!!!!!!!!!!!!!Lowercase branch name working!!!!!!!!!!!!!!!!!!!!!: $branch_name"
+        echo "ON PR: ${{ github.event.pull_request.base.ref }}"
+        echo "!!!!!Lowercase branch name working!!!!!!!!!!!!!: $branch_name"
 
         echo "branch_name=$branch_name" >> $GITHUB_OUTPUT
     - name: Log into registry
