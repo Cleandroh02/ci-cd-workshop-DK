@@ -2,13 +2,14 @@ name: CI
 
 on:
     push:
-      branches: ["apicicd"]
+      tags: ["apicicd", "main"]
     pull_request:
-        branches: [ "main" ]
+        branches: ["apicicd", "main"]
 
 
 jobs:
-  test-format-check:
+  build:
+    name: Build container image
     runs-on: ubuntu-latest
 
     steps:
@@ -51,7 +52,7 @@ jobs:
 
         echo "branch_name=$branch_name" >> $GITHUB_OUTPUT
     - name: Log into registry
-      uses: azure/docker-login@v1
+      uses: azure/docker-login@v2
       with:
         login-server: ${{ secrets.ACR_ENDPOINT }}
         username: ${{ secrets.ACR_USERNAME }}
@@ -61,8 +62,3 @@ jobs:
       with:
           push: true
           tags: ${{ secrets.ACR_ENDPOINT }}/booksapi:${{ steps.branch_name.outputs.branch_name }}
-
-
-
-    
-
