@@ -2,9 +2,9 @@ name: CI
 
 on:
     push:
-      tags: ["apicicd", "main"]
+      branches: ["apicicd"]
     pull_request:
-        branches: ["apicicd", "main"]
+        branches: ["main"]
 
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
 
         fi
       
-        echo "!!!!!!!!!!!!!!!!!!!!!!!!Lowercase branch name working!!!!!!!!!!!!!!!!!!!!!: $branch_name"
+        echo "!!!!!Lowercase branch name working!!!!!!!!!!!!!: $branch_name"
 
         echo "branch_name=$branch_name" >> $GITHUB_OUTPUT
     - name: Log into registry
