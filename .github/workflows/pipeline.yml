@@ -52,7 +52,7 @@ jobs:
 
         echo "branch_name=$branch_name" >> $GITHUB_OUTPUT
     - name: Log into registry
-      uses: azure/docker-login@v2
+      uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.ACR_ENDPOINT }}
         username: ${{ secrets.ACR_USERNAME }}
