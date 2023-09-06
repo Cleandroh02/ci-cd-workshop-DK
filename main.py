@@ -1,11 +1,23 @@
 import uvicorn
 
 from fastapi import FastAPI, HTTPException
+
+
+
+
+
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 from models import Book
+
+
+
+
+
+
+
 
 
 app = FastAPI()
@@ -34,7 +46,10 @@ Base.metadata.create_all(bind=engine)
 
 @app.get("/", include_in_schema=False)
 async def home():
-    return {"message": "Hello World"}
+
+
+    
+    return {"message": "Hello Friends..."}
 
 
 # Create a new book
@@ -84,3 +99,6 @@ async def delete_book(book_id: int):
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
+
+
+
